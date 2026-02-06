@@ -10,6 +10,8 @@ on the URDFModelica library.
 </p>
 
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+<tr><td>Version 0.3.4</td><td>6 February 2026</td><td>Add <tt>overwriteColor</tt> parameter to Link_Visualization2.mo</td></tr>
+<tr><td>Version 0.3.3</td><td>2 October 2025</td><td>Readme</td></tr>
 <tr><td>Version 0.3.2</td><td>27 May 2025</td><td>Add <tt>-g</tt> option to Python script</td></tr>
 <tr><td>Version 0.3.1</td><td>23 May 2025</td><td>Add \"Physics_Wheels\" examples</td></tr>
 <tr><td>Version 0.3.0</td><td>20 May 2025</td><td>Merge main and visualization2 versions into one instead of two branches</td></tr>

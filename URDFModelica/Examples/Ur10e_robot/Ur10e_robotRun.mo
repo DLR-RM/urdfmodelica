@@ -22,12 +22,19 @@ model Ur10e_robotRun
     annotation (Placement(transformation(origin = {-120, 10}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-120, 20}, extent = {{-20, -20}, {20, 20}})));
   Modelica.Blocks.Interfaces.RealInput translationalPositionInput[numTranslationalJoints] if numTranslationalJoints > 0
     annotation (Placement(transformation(origin = {-120, 50}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-120, 60}, extent = {{-20, -20}, {20, 20}})));
-  Modelica.Mechanics.MultiBody.Visualizers.Rectangle plane(length_u = 100, length_v = 100)  annotation(
+  Modelica.Mechanics.MultiBody.Visualizers.Rectangle plane(length_u = 100, length_v = 100) annotation (
     Placement(transformation(origin = {-10, 90}, extent = {{-10, -10}, {10, 10}})));
+  URDFModelica.Links.CollisionPoint collisionPoint[numLeafLinks] annotation (
+    Placement(transformation(origin = {50, -40}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Mechanics.MultiBody.Parts.Fixed[numLeafLinks] fixed annotation (
+    Placement(transformation(origin = {90, -40}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
   Ur10e_robot ur10e_robot(enableCollision = enableCollision) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));
+  Modelica.Mechanics.MultiBody.Joints.FreeMotion freeMotion(r_rel_a(start = {0.0, 0.0, 1.0}), angles_start = {0.0, 0.0, 0.0}) annotation (Placement(transformation(extent = {{-60, 80}, {-40, 100}})));
 
 equation
-  connect(ur10e_robot.frame_a, world.frame_b) annotation (Line(points = {{-20, -40}, {-30, -40}, {-30, 90}, {-80, 90}}, color = {95, 95, 95}));
+  connect(ur10e_robot.frame_a, freeMotion.frame_b) annotation (Line(points = {{-20, -40}, {-30, -40}, {-30, 90}, {-40, 90}}, color = {95, 95, 95}));
+  connect(world.frame_b, freeMotion.frame_a) annotation (Line(points = {{-80, 90}, {-60, 90}}, color = {95, 95, 95}));
+  connect(ur10e_robot.frame_b, collisionPoint.frame_a) annotation (Line(points = {{20, -40}, {40, -40}}, color = {95, 95, 95}));
   connect(rotationalPosition[1].flange, ur10e_robot.rotational_flange_a[1]) annotation (Line(points = {{-60, 10}, {-8, 10}, {-8, -20}}, color = {0, 0, 0}));
   connect(rotationalPosition[1].support, ur10e_robot.rotational_flange_b[1]) annotation (Line(points = {{-70, 0}, {-18, 0}, {-18, -20}}, color = {0, 0, 0}));
   connect(rotationalPosition[2].flange, ur10e_robot.rotational_flange_a[2]) annotation (Line(points = {{-60, 10}, {-8, 10}, {-8, -20}}, color = {0, 0, 0}));
@@ -46,5 +53,7 @@ equation
     Line(points = {{-120, 10}, {-82, 10}}, color = {0, 0, 127}));
   connect(world.frame_b, plane.frame_a) annotation (
     Line(points = {{-80, 90}, {-20, 90}}, color = {95, 95, 95}));
+  connect(collisionPoint.frame_b, fixed.frame_b) annotation (
+    Line(points = {{60, -40}, {80, -40}}, color = {95, 95, 95}));
   annotation (preferredView = "diagram");
 end Ur10e_robotRun;

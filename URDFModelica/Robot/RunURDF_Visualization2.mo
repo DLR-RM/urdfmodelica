@@ -11,6 +11,7 @@ model RunURDF_Visualization2
   parameter Integer numOtherJoints = 0;
   final parameter Integer numJoints = numRotationalJoints + numTranslationalJoints + numOtherJoints;
   parameter Boolean enableCollision = true;
+  parameter Boolean overwriteColor = true "Visualization2 overwrite color of meshes with color from URDF source";
 
   inner Modelica.Mechanics.MultiBody.World world(enableAnimation = false, label2 = "z", n = {0, 0, -1}, animateWorld = false, animateGravity = false)
     annotation (Placement(transformation(origin = {-90, 90}, extent = {{-10, -10}, {10, 10}})));

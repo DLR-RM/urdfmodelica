@@ -11,8 +11,8 @@ package URDFModelica
 
   annotation (
     preferredView = "info",
-    version = "0.3.2",
-    versionDate = "2025-05-27",
+    version = "0.3.4",
+    versionDate = "2026-02-06",
     uses(Modelica(version = "4.0.0")),
     Documentation(info = "<html>
     <H1>URDF Modelica</H1> 

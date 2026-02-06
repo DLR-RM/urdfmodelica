@@ -1,6 +1,6 @@
 within URDFModelica.Examples.Ur10e_robot;
 model Ur10e_robot
-  extends URDFModelica.Icons.StationaryRobotIcon;
+  extends URDFModelica.Icons.MobileRobotIcon;
   extends Modelica.Mechanics.MultiBody.Interfaces.PartialOneFrame_a;
 
   parameter Integer numCollisionLinks = 7;

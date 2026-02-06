@@ -11,6 +11,7 @@ model BaseURDF
   parameter Integer numOtherJoints = 0;
   final parameter Integer numJoints = numRotationalJoints + numTranslationalJoints + numOtherJoints;
   parameter Boolean enableCollision = true;
+  parameter Boolean overwriteColor = true "Visualization2 overwrite color of meshes with color from URDF source";
 
   Modelica.Mechanics.Rotational.Interfaces.Flange_b rotational_flange_b[numRotationalJoints] if numRotationalJoints > 0
     annotation (Placement(transformation(extent = {{-100, 90}, {-80, 110}})));

@@ -11,6 +11,7 @@ model PhysicsRun
   parameter Integer numOtherJoints = 7;
   final parameter Integer numJoints = numRotationalJoints + numTranslationalJoints + numOtherJoints;
   parameter Boolean enableCollision = true;
+  parameter Boolean overwriteColor = true "Visualization2 overwrite color of meshes with color from URDF source";
 
   inner Modelica.Mechanics.MultiBody.World world(enableAnimation = false, label2 = "z", n = {0, 0, -1}, animateWorld = false, animateGravity = false)
     annotation (Placement(transformation(origin = {-90, 90}, extent = {{-10, -10}, {10, 10}})));
@@ -25,7 +26,7 @@ model PhysicsRun
   Visualization2.Shapes.Primitives.Plane plane(length = 100, width = 100, iconColor = {0, 128, 255})
     annotation (Placement(transformation(origin = {-10, 90}, extent = {{-10, -10}, {10, 10}})));
   inner Visualization2.VisualizationSetup visualizationSetup annotation (Placement(transformation(extent = {{80, 80}, {100, 100}})));
-  Physics physics(enableCollision = enableCollision) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));
+  Physics physics(enableCollision = enableCollision, overwriteColor = overwriteColor) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));
   Modelica.Mechanics.MultiBody.Joints.FreeMotion freeMotion(r_rel_a(start = {0.0, 0.0, 1.0}), angles_start = {0.0, 0.0, 0.0}) annotation (Placement(transformation(extent = {{-60, 80}, {-40, 100}})));
 
 equation

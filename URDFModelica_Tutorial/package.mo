@@ -3,8 +3,8 @@ package URDFModelica_Tutorial
 
   annotation (
     preferredView = "info",
-    version = "0.3.2",
-    versionDate = "2025-05-27",
+    version = "0.3.4",
+    versionDate = "2026-03-06",
     uses(Modelica(version = "4.0.0"), Visualization2(version="1.1")),
     Documentation(info = "<html>
     <H1>URDF Modelica</H1> 

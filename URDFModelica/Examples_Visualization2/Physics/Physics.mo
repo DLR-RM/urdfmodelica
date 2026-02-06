@@ -12,6 +12,7 @@ model Physics
   parameter Integer numOtherJoints = 7;
   final parameter Integer numJoints = numRotationalJoints + numTranslationalJoints + numOtherJoints;
   parameter Boolean enableCollision = true;
+  parameter Boolean overwriteColor = true "Visualization2 overwrite color of meshes with color from URDF source";
 
   Modelica.Mechanics.Rotational.Interfaces.Flange_b rotational_flange_b[numRotationalJoints] if numRotationalJoints > 0
     annotation (Placement(transformation(extent = {{-100, 90}, {-80, 110}})));
@@ -22,37 +23,37 @@ model Physics
   Modelica.Mechanics.Translational.Interfaces.Flange_a translational_flange_a[numTranslationalJoints] if numTranslationalJoints > 0
     annotation (Placement(transformation(extent = {{80, 90}, {100, 110}})));
 
-  Links.Base_link base_link(enableCollision = enableCollision)
+  Links.Base_link base_link(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {-80, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Right_leg right_leg(enableCollision = enableCollision)
+  Links.Right_leg right_leg(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {-30, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Right_base right_base(enableCollision = enableCollision)
+  Links.Right_base right_base(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {20, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Right_front_wheel right_front_wheel(enableCollision = enableCollision)
+  Links.Right_front_wheel right_front_wheel(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {70, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Right_back_wheel right_back_wheel(enableCollision = enableCollision)
+  Links.Right_back_wheel right_back_wheel(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {70, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Left_leg left_leg(enableCollision = enableCollision)
+  Links.Left_leg left_leg(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {-30, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Left_base left_base(enableCollision = enableCollision)
+  Links.Left_base left_base(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {20, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Left_front_wheel left_front_wheel(enableCollision = enableCollision)
+  Links.Left_front_wheel left_front_wheel(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {70, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Left_back_wheel left_back_wheel(enableCollision = enableCollision)
+  Links.Left_back_wheel left_back_wheel(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {70, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Gripper_pole gripper_pole(enableCollision = enableCollision)
+  Links.Gripper_pole gripper_pole(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {-30, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Left_gripper left_gripper(enableCollision = enableCollision)
+  Links.Left_gripper left_gripper(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {20, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Left_tip left_tip(enableCollision = enableCollision)
+  Links.Left_tip left_tip(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {70, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Right_gripper right_gripper(enableCollision = enableCollision)
+  Links.Right_gripper right_gripper(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {20, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Right_tip right_tip(enableCollision = enableCollision)
+  Links.Right_tip right_tip(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {70, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Head head(enableCollision = enableCollision)
+  Links.Head head(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {-30, -100}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Box box(enableCollision = enableCollision)
+  Links.Box box(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {20, -100}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
   Joints.Base_to_right_leg base_to_right_leg
     annotation (Placement(transformation(origin = {-55, 70}, extent = {{-10, -10}, {10, 10}})));

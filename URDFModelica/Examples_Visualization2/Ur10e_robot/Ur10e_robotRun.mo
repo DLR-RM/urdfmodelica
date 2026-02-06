@@ -11,6 +11,7 @@ model Ur10e_robotRun
   parameter Integer numOtherJoints = 4;
   final parameter Integer numJoints = numRotationalJoints + numTranslationalJoints + numOtherJoints;
   parameter Boolean enableCollision = true;
+  parameter Boolean overwriteColor = true "Visualization2 overwrite color of meshes with color from URDF source";
 
   inner Modelica.Mechanics.MultiBody.World world(enableAnimation = false, label2 = "z", n = {0, 0, -1}, animateWorld = false, animateGravity = false)
     annotation (Placement(transformation(origin = {-90, 90}, extent = {{-10, -10}, {10, 10}})));
@@ -25,7 +26,7 @@ model Ur10e_robotRun
   Visualization2.Shapes.Primitives.Plane plane(length = 100, width = 100, iconColor = {0, 128, 255})
     annotation (Placement(transformation(origin = {-10, 90}, extent = {{-10, -10}, {10, 10}})));
   inner Visualization2.VisualizationSetup visualizationSetup annotation (Placement(transformation(extent = {{80, 80}, {100, 100}})));
-  Ur10e_robot ur10e_robot(enableCollision = enableCollision) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));
+  Ur10e_robot ur10e_robot(enableCollision = enableCollision, overwriteColor = overwriteColor) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));
 
 equation
   connect(ur10e_robot.frame_a, world.frame_b) annotation (Line(points = {{-20, -40}, {-30, -40}, {-30, 90}, {-80, 90}}, color = {95, 95, 95}));

@@ -5,6 +5,7 @@ model Link_Visualization2
      constrainedby URDFModelica.Records.Link  annotation (Placement(transformation(origin = {-90, 90}, extent = {{-10, -10}, {10, 10}})));
   parameter Boolean enableCollision = true;
   parameter Boolean enableInertial = true;
+  parameter Boolean overwriteColor = true "Visualization2 overwrite color of meshes with color from URDF source";
   Modelica.Mechanics.MultiBody.Parts.FixedRotation trafoInertial(
     r = linkParams.inertial.origin.xyz,
     rotationType = Modelica.Mechanics.MultiBody.Types.RotationTypes.PlanarRotationSequence,
@@ -39,7 +40,7 @@ model Link_Visualization2
     Placement(transformation(origin = {0, 30}, extent = {{-10, -10}, {10, 10}})));
   Visualization2.Shapes.Primitives.Sphere visualSphere(radius = linkParams.visual.geometry.radius, color = integer(linkParams.visual.material.rgba[1:3]*255), transparency = 1 - linkParams.visual.material.rgba[4]) if linkParams.hasVisual and linkParams.visual.geometry.geometryType == URDFModelica.Types.GeometryType.sphere annotation (
     Placement(transformation(origin = {30, 30}, extent = {{-10, -10}, {10, 10}})));
-  Visualization2.Shapes.Files.CADFile visualMesh(filename = Modelica.Utilities.Files.loadResource(linkParams.visual.geometry.filename), scale = linkParams.visual.geometry.scale, transparency = 1 - linkParams.visual.material.rgba[4], overwriteColor = true, color = integer(linkParams.visual.material.rgba[1:3]*255)) if linkParams.hasVisual and linkParams.visual.geometry.geometryType == URDFModelica.Types.GeometryType.mesh annotation (
+  Visualization2.Shapes.Files.CADFile visualMesh(filename = Modelica.Utilities.Files.loadResource(linkParams.visual.geometry.filename), scale = linkParams.visual.geometry.scale, transparency = 1 - linkParams.visual.material.rgba[4], overwriteColor = overwriteColor, color = integer(linkParams.visual.material.rgba[1:3]*255)) if linkParams.hasVisual and linkParams.visual.geometry.geometryType == URDFModelica.Types.GeometryType.mesh annotation (
     Placement(transformation(origin = {60, 30}, extent = {{-10, -10}, {10, 10}})));
   Visualization2.Shapes.Primitives.Cube collisionBox(height = linkParams.collision.geometry.size[3], length = linkParams.collision.geometry.size[1], width = linkParams.collision.geometry.size[2], color = {255, 0, 255}, transparency = 0.5) if linkParams.hasCollision and linkParams.collision.geometry.geometryType == URDFModelica.Types.GeometryType.box and enableCollision annotation (
     Placement(transformation(origin = {-30, -30}, extent = {{-10, -10}, {10, 10}})));

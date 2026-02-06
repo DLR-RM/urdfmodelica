@@ -44,6 +44,9 @@ models are simulated externally.
 The correct visualization component (box, cylinder, sphere, 
 CAD file) is selected from all components contained in 
 the <strong>Link_Visualization2</strong> prototype model. 
+By default colors from URDF are always used, colors from 
+meshes can be used instead by setting the parameter
+<tt>overwriteColor</tt> to <tt>false</tt>. 
 The visualization2 version requires the 
 <a href=\"https://www.sr-scil.de/simulationsbibliotheken/kommerziell-verfuegbar/visualization/\">
 DLR Visualization 2 library</a>, the free community 

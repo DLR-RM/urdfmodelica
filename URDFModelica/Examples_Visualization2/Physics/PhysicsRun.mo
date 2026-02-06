@@ -11,6 +11,7 @@ model PhysicsRun
   parameter Integer numOtherJoints = 7;
   final parameter Integer numJoints = numRotationalJoints + numTranslationalJoints + numOtherJoints;
   parameter Boolean enableCollision = true;
+  parameter Boolean overwriteColor = true "Visualization2 overwrite color of meshes with color from URDF source";
 
   inner Modelica.Mechanics.MultiBody.World world(enableAnimation = false, label2 = "z", n = {0, 0, -1}, animateWorld = false, animateGravity = false)
     annotation (Placement(transformation(origin = {-90, 90}, extent = {{-10, -10}, {10, 10}})));
@@ -25,11 +26,11 @@ model PhysicsRun
   Visualization2.Shapes.Primitives.Plane plane(length = 100, width = 100, iconColor = {0, 128, 255})
     annotation (Placement(transformation(origin = {-10, 90}, extent = {{-10, -10}, {10, 10}})));
   inner Visualization2.VisualizationSetup visualizationSetup annotation (Placement(transformation(extent = {{80, 80}, {100, 100}})));
-  URDFModelica.Links.CollisionPoint collisionPoint[numLeafLinks] annotation(
+  URDFModelica.Links.CollisionPoint collisionPoint[numLeafLinks] annotation (
     Placement(transformation(origin = {50, -40}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Mechanics.MultiBody.Parts.Fixed[numLeafLinks] fixed annotation(
+  Modelica.Mechanics.MultiBody.Parts.Fixed[numLeafLinks] fixed annotation (
     Placement(transformation(origin = {90, -40}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
-  Physics physics(enableCollision = enableCollision) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));
+  Physics physics(enableCollision = enableCollision, overwriteColor = overwriteColor) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));
   Modelica.Mechanics.MultiBody.Joints.FreeMotion freeMotion(r_rel_a(start = {0.0, 0.0, 1.0}), angles_start = {0.0, 0.0, 0.0}) annotation (Placement(transformation(extent = {{-60, 80}, {-40, 100}})));
 
 equation
@@ -58,7 +59,7 @@ equation
     Line(points = {{-120, 10}, {-82, 10}}, color = {0, 0, 127}));
   connect(world.frame_b, plane.frame_a) annotation (
     Line(points = {{-80, 90}, {-20, 90}}, color = {95, 95, 95}));
-  connect(collisionPoint.frame_b, fixed.frame_b) annotation(
+  connect(collisionPoint.frame_b, fixed.frame_b) annotation (
     Line(points = {{60, -40}, {80, -40}}, color = {95, 95, 95}));
   annotation (preferredView = "diagram");
 end PhysicsRun;

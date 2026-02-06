@@ -252,7 +252,7 @@ def save_joint(joint, robotname, rootpath, packagepath, modelicapackagepath, upd
     if not update:
         save_elem(joint, jointClassName, 'Joint', joint.type.capitalize(), robotname, rootpath, packagepath, modelicapackagepath)
 
-def save_robot(robot, robotname, modelname, stationary, numCollisionLinks, numNonCollisionLinks, numRotationalJoints, numTranslationalJoints, numOtherJoints, rootpath, packagepath, modelicapackagepath, ordered_elements_positions, leafs):
+def save_robot(robot, robotname, modelname, visualization2, stationary, numCollisionLinks, numNonCollisionLinks, numRotationalJoints, numTranslationalJoints, numOtherJoints, rootpath, packagepath, modelicapackagepath, ordered_elements_positions, leafs):
     with open(rootpath + '/' + packagepath + '/' + robotname + '/' + modelname + '.mo', 'w') as f:
         f.write('within ' + modelicapackagepath + '.' + robotname + ';\n')
         f.write('model ' + modelname + '\n')
@@ -287,6 +287,8 @@ def save_robot(robot, robotname, modelname, stationary, numCollisionLinks, numNo
                     f.write('  parameter Integer numTranslationalJoints = ' + str(int(numTranslationalJoints)) + ';\n')
                 elif 'Integer numOtherJoints' in line:
                     f.write('  parameter Integer numOtherJoints = ' + str(int(numOtherJoints)) + ';\n')
+                elif 'Boolean overwriteColor' in line and not visualization2:
+                    pass
                 elif not line.startswith('within') and not line.startswith('model') and not line.startswith('partial'):
                     f.write(line)
 
@@ -295,7 +297,10 @@ def save_robot(robot, robotname, modelname, stationary, numCollisionLinks, numNo
             linkClassName = to_class_name(link.name)
             for index in range(len(ordered_elements_positions)):
                 if ordered_elements_positions[index][0] == linkClassName.lower():
-                    f.write('  Links.' + linkClassName + ' ' + linkClassName.lower() + '(enableCollision = enableCollision)\n')
+                    if visualization2:
+                        f.write('  Links.' + linkClassName + ' ' + linkClassName.lower() + '(enableCollision = enableCollision, overwriteColor = overwriteColor)\n')
+                    else:
+                        f.write('  Links.' + linkClassName + ' ' + linkClassName.lower() + '(enableCollision = enableCollision)\n')
                     f.write('    annotation (Placement(transformation(origin = {' + str(ordered_elements_positions[index][1]) + ', ' + str(ordered_elements_positions[index][2]+10) + '}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));\n')
                     
         rotationalCounter = 0
@@ -388,7 +393,7 @@ def save_robot(robot, robotname, modelname, stationary, numCollisionLinks, numNo
 
         f.write('end ' + modelname + ';\n')
 
-def save_robot_run(robot, robotname, modelname, stationary, numCollisionLinks, numNonCollisionLinks, numRotationalJoints, numTranslationalJoints, numOtherJoints, rootpath, packagepath, modelicapackagepath, visualization2, ordered_elements_positions, leafs):
+def save_robot_run(robot, robotname, modelname, visualization2, stationary, numCollisionLinks, numNonCollisionLinks, numRotationalJoints, numTranslationalJoints, numOtherJoints, rootpath, packagepath, modelicapackagepath, ordered_elements_positions, leafs):
     robotClassName = to_class_name(robot.name)
     with open(rootpath + '/' + packagepath + '/' + robotname + '/' + modelname + '.mo', 'w') as f:
         f.write('within ' + modelicapackagepath + '.' + robotname + ';\n')
@@ -424,6 +429,8 @@ def save_robot_run(robot, robotname, modelname, stationary, numCollisionLinks, n
                     f.write('  parameter Integer numTranslationalJoints = ' + str(int(numTranslationalJoints)) + ';\n')
                 elif 'Integer numOtherJoints' in line:
                     f.write('  parameter Integer numOtherJoints = ' + str(int(numOtherJoints)) + ';\n')
+                elif 'Boolean overwriteColor' in line and not visualization2:
+                    pass
                 elif 'URDFModelica.Links.CollisionPoint' in line and stationary: # leafs collision points only if not stationary
                     while ';' not in line:
                         line = next(readf)
@@ -434,7 +441,10 @@ def save_robot_run(robot, robotname, modelname, stationary, numCollisionLinks, n
                     f.write(line)
 
         # add robot
-        f.write('  ' + robotClassName + ' ' + robotClassName.lower() + '(enableCollision = enableCollision) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));\n')
+        if visualization2:
+            f.write('  ' + robotClassName + ' ' + robotClassName.lower() + '(enableCollision = enableCollision, overwriteColor = overwriteColor) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));\n')
+        else:
+            f.write('  ' + robotClassName + ' ' + robotClassName.lower() + '(enableCollision = enableCollision) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));\n')
         # add free motion with initial values for mobile robots
         if not stationary:
             f.write('  Modelica.Mechanics.MultiBody.Joints.FreeMotion freeMotion(r_rel_a(start = {0.0, 0.0, 1.0}), angles_start = {0.0, 0.0, 0.0}) annotation (Placement(transformation(extent = {{-60, 80}, {-40, 100}})));\n')
@@ -478,7 +488,7 @@ def save_robot_run(robot, robotname, modelname, stationary, numCollisionLinks, n
                     
         f.write('end ' + modelname + ';\n')
 
-def save_robot_test(robot, robotname, modelname, stationary, numCollisionLinks, numNonCollisionLinks, numRotationalJoints, numTranslationalJoints, numOtherJoints, rootpath, packagepath, modelicapackagepath, ordered_elements_positions, leafs):
+def save_robot_test(robot, robotname, modelname, visualization2, stationary, numCollisionLinks, numNonCollisionLinks, numRotationalJoints, numTranslationalJoints, numOtherJoints, rootpath, packagepath, modelicapackagepath, ordered_elements_positions, leafs):
     robotClassName = to_class_name(robot.name)
     with open(rootpath + '/' + packagepath + '/' + robotname + '/' + modelname + '.mo', 'w') as f:
         f.write('within ' + modelicapackagepath + '.' + robotname + ';\n')
@@ -510,11 +520,16 @@ def save_robot_test(robot, robotname, modelname, stationary, numCollisionLinks, 
                     f.write('  parameter Integer numTranslationalJoints = ' + str(int(numTranslationalJoints)) + ';\n')
                 elif 'Integer numOtherJoints' in line:
                     f.write('  parameter Integer numOtherJoints = ' + str(int(numOtherJoints)) + ';\n')
+                elif 'Boolean overwriteColor' in line and not visualization2:
+                    pass
                 elif not line.startswith('within') and not line.startswith('model') and not line.startswith('partial'):
                     f.write(line)
 
         # add robot run
-        f.write('  ' + robotClassName + 'Run ' + robotClassName.lower() + 'Run(enableCollision = enableCollision) annotation (Placement(transformation(extent = {{-10, -10}, {10, 10}})));\n')
+        if visualization2:
+            f.write('  ' + robotClassName + 'Run ' + robotClassName.lower() + 'Run(enableCollision = enableCollision, overwriteColor = overwriteColor) annotation (Placement(transformation(extent = {{-10, -10}, {10, 10}})));\n')
+        else:
+            f.write('  ' + robotClassName + 'Run ' + robotClassName.lower() + 'Run(enableCollision = enableCollision) annotation (Placement(transformation(extent = {{-10, -10}, {10, 10}})));\n')
 
         f.write('\nequation\n')
 
@@ -689,19 +704,19 @@ def to_modelica_package(robot, rootpath, packagepath, visualization2, stationary
     if not update:
         # create or overwrite robot, run and test models
         packageorder.append(robotClassName)
-        save_robot(robot, robotClassName, robotClassName, stationary,
+        save_robot(robot, robotClassName, robotClassName, visualization2, stationary,
                    len(collisionLinks), len(nonCollisionLinks), len(rotationalJoints), len(translationalJoints), len(otherJoints),
                    rootpath, packagepath, modelicapackagepath,
                    ordered_elements_positions, leafs)
 
         packageorder.append(robotClassName + 'Run')
-        save_robot_run(robot, robotClassName, robotClassName + 'Run', stationary,
+        save_robot_run(robot, robotClassName, robotClassName + 'Run', visualization2, stationary,
                        len(collisionLinks), len(nonCollisionLinks), len(rotationalJoints), len(translationalJoints), len(otherJoints),
-                       rootpath, packagepath, modelicapackagepath, visualization2,
+                       rootpath, packagepath, modelicapackagepath,
                        ordered_elements_positions, leafs)
 
         packageorder.append(robotClassName + 'Test')
-        save_robot_test(robot, robotClassName, robotClassName + 'Test', stationary,
+        save_robot_test(robot, robotClassName, robotClassName + 'Test', visualization2, stationary,
                         len(collisionLinks), len(nonCollisionLinks), len(rotationalJoints), len(translationalJoints), len(otherJoints),
                         rootpath, packagepath, modelicapackagepath,
                         ordered_elements_positions, leafs)
@@ -1301,7 +1316,7 @@ def main(argv):
     
     inputfile = 'physics.urdf' # URDF input file
     outputfile = 'noOutput' # Robots Modelica record file to create or overwrite
-    rootpath = 'H:/URDF_tutorial' # this is the path to the root directory where the Modelica packages are
+    rootpath = 'H:/URDF_tutorial/urdfmodelica_github' # this is the path to the root directory where the Modelica packages are
     packagepath = 'URDFModelica/Examples' # this is the path from root where the robot pacakge will be created or overwritten
     visualization2 = False # if False then standard library visualizers, if True then Visualization2 visualizers
     stationary = False # if False then robotRun has freeMotion and collision to z=0 plane, if True then robotRun is fixed to origin
@@ -1310,13 +1325,13 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv,'hi:o:r:p:vsug',['ifile=','ofile=','rootpath=','packagepath='])
     except getopt.GetoptError:
-        print('urdf2Record.py -i <inputfile> -o <Robots_outputfile> -r <path/to/root/directory> -p <Modelica/package/without/robot/name> -s -v -u -g')
-        print('urdf2Record.py --ifile <inputfile> --ofile <Robots_outputfile> --rootpath <path/to/root/directory> --packagepath <Modelica/package/without/robot/name> --stationary --visualization2 --update --genericonly')
+        print('urdf_to_package.py -i <inputfile.urdf> -o <outputfile_modelicarecord.mo> -r <path/to/root/directory> -p <Modelica/package/without/robot/name> -s -v -u -g')
+        print('urdf_to_package.py --ifile <inputfile.urdf> --ofile <outputfile_modelicarecord.mo> --rootpath <path/to/root/directory> --packagepath <Modelica/package/without/robot/name> --stationary --visualization2 --update --genericonly')
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print('urdf2Record.py -i <inputfile> -o <Robots_outputfile> -r <path/to/root/directory> -p <Modelica/package/without/robot/name> -s -v -u -g')
-            print('urdf2Record.py --ifile <inputfile> --ofile <Robots_outputfile> --rootpath <path/to/root/directory> --packagepath <Modelica/package/without/robot/name> --stationary --visualization2 --update --genericonly')
+            print('urdf_to_package.py -i <inputfile.urdf> -o <outputfile_modelicarecord.mo> -r <path/to/root/directory> -p <Modelica/package/without/robot/name> -s -v -u -g')
+            print('urdf_to_package.py --ifile <inputfile.urdf> --ofile <outputfile_modelicarecord.mo> --rootpath <path/to/root/directory> --packagepath <Modelica/package/without/robot/name> --stationary --visualization2 --update --genericonly')
             sys.exit()
         elif opt in ('-i', '--ifile'):
             inputfile = arg
@@ -1346,7 +1361,7 @@ def main(argv):
     
     mr = to_modelica_record(robot)
     
-    if outputfile == 'noOutput':
+    if outputfile == 'noOutput' or outputfile == '' or outputfile == None:
         outputfile = robot.name + '.mo'
     
     of = open(outputfile, 'w')

@@ -104,8 +104,8 @@ equation
           textString = "%name",
           textColor = {0, 0, 255}),
         Text(
-		  extent = {{-150, -100}, {150, -70}},
-		  textString = "n=%jointParams.axis.xyz"),
+          extent = {{-150, -100}, {150, -70}},
+          textString = "n=%jointParams.axis.xyz"),
         Text(
           origin = {0, -10},
           textColor = {135, 135, 135},

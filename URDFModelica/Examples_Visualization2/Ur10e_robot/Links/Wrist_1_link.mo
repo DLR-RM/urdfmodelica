@@ -4,6 +4,7 @@ model Wrist_1_link
   parameter Wrist_1_linkParams linkParams annotation (Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
   parameter Boolean enableCollision = true;
   parameter Boolean enableInertial = true;
+  parameter Boolean overwriteColor = true "Visualization2 overwrite color of meshes with color from URDF source";
   Modelica.Mechanics.MultiBody.Parts.FixedRotation trafoInertial(
     r = linkParams.inertial.origin.xyz,
     rotationType = Modelica.Mechanics.MultiBody.Types.RotationTypes.PlanarRotationSequence,
@@ -32,7 +33,7 @@ model Wrist_1_link
     I_31 = linkParams.inertial.inertia.ixz,
     I_32 = linkParams.inertial.inertia.iyz, animation = false) if enableInertial annotation (
     Placement(transformation(origin = {-10, 0}, extent = {{-10, -10}, {10, 10}})));
-  Visualization2.Shapes.Files.CADFile visualMesh(filename = Modelica.Utilities.Files.loadResource(linkParams.visual.geometry.filename), scale = linkParams.visual.geometry.scale, transparency = 1 - linkParams.visual.material.rgba[4], overwriteColor = true, color = integer(linkParams.visual.material.rgba[1:3]*255)) if linkParams.hasVisual and linkParams.visual.geometry.geometryType == URDFModelica.Types.GeometryType.mesh annotation (
+  Visualization2.Shapes.Files.CADFile visualMesh(filename = Modelica.Utilities.Files.loadResource(linkParams.visual.geometry.filename), scale = linkParams.visual.geometry.scale, transparency = 1 - linkParams.visual.material.rgba[4], overwriteColor = overwriteColor, color = integer(linkParams.visual.material.rgba[1:3]*255)) if linkParams.hasVisual and linkParams.visual.geometry.geometryType == URDFModelica.Types.GeometryType.mesh annotation (
     Placement(transformation(origin = {60, 30}, extent = {{-10, -10}, {10, 10}})));
   Visualization2.Shapes.Files.CADFile collisionMesh(filename = Modelica.Utilities.Files.loadResource(linkParams.collision.geometry.filename), scale = linkParams.collision.geometry.scale, transparency = 0.5, overwriteColor = true, color = {255, 0, 255}) if linkParams.hasCollision and linkParams.collision.geometry.geometryType == URDFModelica.Types.GeometryType.mesh and enableCollision annotation (
     Placement(transformation(origin = {60, -30}, extent = {{-10, -10}, {10, 10}})));

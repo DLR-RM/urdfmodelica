@@ -4,6 +4,7 @@ model Left_leg
   parameter Left_legParams linkParams annotation (Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
   parameter Boolean enableCollision = true;
   parameter Boolean enableInertial = true;
+  parameter Boolean overwriteColor = true "Visualization2 overwrite color of meshes with color from URDF source";
   Modelica.Mechanics.MultiBody.Parts.FixedRotation trafoInertial(
     r = linkParams.inertial.origin.xyz,
     rotationType = Modelica.Mechanics.MultiBody.Types.RotationTypes.PlanarRotationSequence,

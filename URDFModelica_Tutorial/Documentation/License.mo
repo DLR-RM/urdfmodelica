@@ -6,7 +6,7 @@ class License "Copyright and License"
 <img src=\"modelica://URDFModelica/Resources/DLR-Signet_black_small.png\">
 </div>
 <p>
-&copy; 2025, DLR<br>
+&copy; 2026, DLR<br>
 All rights reserved.
 </p>
 

@@ -2,14 +2,14 @@ within URDFModelica.Examples.Ur10e_robot.Joints;
 model Wrist_3_flange
   extends Modelica.Mechanics.MultiBody.Interfaces.PartialTwoFrames;
   parameter Wrist_3_flangeParams jointParams annotation (Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
-  Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation(r = jointParams.origin.xyz, rotationType = Modelica.Mechanics.MultiBody.Types.RotationTypes.PlanarRotationSequence, sequence = {3, 2, 1}, angles = Modelica.Units.Conversions.to_deg({jointParams.origin.rpy[3], jointParams.origin.rpy[2], jointParams.origin.rpy[1]}), animation = false)  annotation (
+  Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation(r = jointParams.origin.xyz, rotationType = Modelica.Mechanics.MultiBody.Types.RotationTypes.PlanarRotationSequence, sequence = {3, 2, 1}, angles = Modelica.Units.Conversions.to_deg({jointParams.origin.rpy[3], jointParams.origin.rpy[2], jointParams.origin.rpy[1]}), animation = false) annotation (
     Placement(transformation(origin = {-70, 0}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(frame_a, fixedRotation.frame_a) annotation (
     Line(points = {{-100, 0}, {-80, 0}}));
   connect(fixedRotation.frame_b, frame_b) annotation (
     Line(points = {{-60, 0}, {100, 0}}, color = {95, 95, 95}));
-  annotation(Icon(coordinateSystem(
+  annotation (Icon(coordinateSystem(
         preserveAspectRatio = true,
         extent = {{-100, -100}, {100, 100}}), graphics = {
         Rectangle(

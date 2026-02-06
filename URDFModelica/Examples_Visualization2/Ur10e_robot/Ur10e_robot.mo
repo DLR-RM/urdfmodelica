@@ -12,6 +12,7 @@ model Ur10e_robot
   parameter Integer numOtherJoints = 4;
   final parameter Integer numJoints = numRotationalJoints + numTranslationalJoints + numOtherJoints;
   parameter Boolean enableCollision = true;
+  parameter Boolean overwriteColor = true "Visualization2 overwrite color of meshes with color from URDF source";
 
   Modelica.Mechanics.Rotational.Interfaces.Flange_b rotational_flange_b[numRotationalJoints] if numRotationalJoints > 0
     annotation (Placement(transformation(extent = {{-100, 90}, {-80, 110}})));
@@ -22,27 +23,27 @@ model Ur10e_robot
   Modelica.Mechanics.Translational.Interfaces.Flange_a translational_flange_a[numTranslationalJoints] if numTranslationalJoints > 0
     annotation (Placement(transformation(extent = {{80, 90}, {100, 110}})));
 
-  Links.Base_link base_link(enableCollision = enableCollision)
+  Links.Base_link base_link(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {-80, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Base_link_inertia base_link_inertia(enableCollision = enableCollision)
+  Links.Base_link_inertia base_link_inertia(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {-30, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Shoulder_link shoulder_link(enableCollision = enableCollision)
+  Links.Shoulder_link shoulder_link(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {20, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Upper_arm_link upper_arm_link(enableCollision = enableCollision)
+  Links.Upper_arm_link upper_arm_link(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {70, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Forearm_link forearm_link(enableCollision = enableCollision)
+  Links.Forearm_link forearm_link(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {120, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Wrist_1_link wrist_1_link(enableCollision = enableCollision)
+  Links.Wrist_1_link wrist_1_link(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {170, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Wrist_2_link wrist_2_link(enableCollision = enableCollision)
+  Links.Wrist_2_link wrist_2_link(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {220, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Wrist_3_link wrist_3_link(enableCollision = enableCollision)
+  Links.Wrist_3_link wrist_3_link(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {270, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Base base(enableCollision = enableCollision)
+  Links.Base base(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {-30, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Flange flange(enableCollision = enableCollision)
+  Links.Flange flange(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {320, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Links.Tool0 tool0(enableCollision = enableCollision)
+  Links.Tool0 tool0(enableCollision = enableCollision, overwriteColor = overwriteColor)
     annotation (Placement(transformation(origin = {370, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
   Joints.Base_link_base_link_inertia base_link_base_link_inertia
     annotation (Placement(transformation(origin = {-55, 40}, extent = {{-10, -10}, {10, 10}})));
