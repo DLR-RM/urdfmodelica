@@ -99,7 +99,7 @@ def save_elem(elem, elemname, elemtype, elemtypetype, robotname, rootpath, packa
                                 line = next(readf)
                         else:
                             f.write(line)
-                    elif 'Visualization2.Shapes.Primitives.Cube' in line: # copy lines that declare visualBox only if elem has visual and is box, visualization2 version
+                    elif 'Visualization2.Shapes.Primitives.Cube visualBox' in line: # copy lines that declare visualBox only if elem has visual and is box, visualization2 version
                         if not elem.visual:
                             while ';' not in line:
                                 line = next(readf)
@@ -108,7 +108,7 @@ def save_elem(elem, elemname, elemtype, elemtypetype, robotname, rootpath, packa
                                 line = next(readf)
                         else:
                             f.write(line)
-                    elif 'Visualization2.Shapes.Primitives.Cylinder' in line: # copy lines that declare visualCylinder only if elem has visual and is cylinder, visualization2 version
+                    elif 'Visualization2.Shapes.Primitives.Cylinder visualCylinder' in line: # copy lines that declare visualCylinder only if elem has visual and is cylinder, visualization2 version
                         if not elem.visual:
                             while ';' not in line:
                                 line = next(readf)
@@ -117,7 +117,7 @@ def save_elem(elem, elemname, elemtype, elemtypetype, robotname, rootpath, packa
                                 line = next(readf)
                         else:
                             f.write(line)
-                    elif 'Visualization2.Shapes.Primitives.Sphere' in line: # copy lines that declare visualSphere only if elem has visual and is sphere, visualization2 version
+                    elif 'Visualization2.Shapes.Primitives.Sphere visualSphere' in line: # copy lines that declare visualSphere only if elem has visual and is sphere, visualization2 version
                         if not elem.visual:
                             while ';' not in line:
                                 line = next(readf)
