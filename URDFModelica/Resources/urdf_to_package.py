@@ -311,10 +311,16 @@ def save_robot(robot, robotname, modelname, visualization2, stationary, numColli
                 if ordered_elements_positions[index][0] == jointClassName.lower():
                     if joint.type == 'revolute' or joint.type == 'continuous':
                         rotationalCounter += 1
-                        f.write('  Joints.' + jointClassName + ' ' + jointClassName.lower() + '(flangeIndex = ' + str(int(rotationalCounter)) + ')\n')
+                        if joint.limit:
+                            f.write('  Joints.' + jointClassName + ' ' + jointClassName.lower() + '(flangeIndex = ' + str(int(rotationalCounter)) + ', checkJointLimits = checkJointLimits, assertionLevel = assertionLevel)\n')
+                        else:
+                            f.write('  Joints.' + jointClassName + ' ' + jointClassName.lower() + '(flangeIndex = ' + str(int(rotationalCounter)) + ')\n')
                     elif joint.type == 'prismatic':
                         translationalCounter += 1
-                        f.write('  Joints.' + jointClassName + ' ' + jointClassName.lower() + '(flangeIndex = ' + str(int(translationalCounter)) + ')\n')
+                        if joint.limit:
+                            f.write('  Joints.' + jointClassName + ' ' + jointClassName.lower() + '(flangeIndex = ' + str(int(translationalCounter)) + ', checkJointLimits = checkJointLimits, assertionLevel = assertionLevel)\n')
+                        else:
+                            f.write('  Joints.' + jointClassName + ' ' + jointClassName.lower() + '(flangeIndex = ' + str(int(translationalCounter)) + ')\n')
                     else:
                         f.write('  Joints.' + jointClassName + ' ' + jointClassName.lower() + '\n')
                     f.write('    annotation (Placement(transformation(origin = {' + str(ordered_elements_positions[index][1]) + ', ' + str(ordered_elements_positions[index][2]) + '}, extent = {{-10, -10}, {10, 10}})));\n')
@@ -442,9 +448,9 @@ def save_robot_run(robot, robotname, modelname, visualization2, stationary, numC
 
         # add robot
         if visualization2:
-            f.write('  ' + robotClassName + ' ' + robotClassName.lower() + '(enableCollision = enableCollision, overwriteColor = overwriteColor) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));\n')
+            f.write('  ' + robotClassName + ' ' + robotClassName.lower() + '(enableCollision = enableCollision, checkJointLimits = checkJointLimits, assertionLevel = assertionLevel, overwriteColor = overwriteColor) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));\n')
         else:
-            f.write('  ' + robotClassName + ' ' + robotClassName.lower() + '(enableCollision = enableCollision) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));\n')
+            f.write('  ' + robotClassName + ' ' + robotClassName.lower() + '(enableCollision = enableCollision, checkJointLimits = checkJointLimits, assertionLevel = assertionLevel) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));\n')
         # add free motion with initial values for mobile robots
         if not stationary:
             f.write('  Modelica.Mechanics.MultiBody.Joints.FreeMotion freeMotion(r_rel_a(start = {0.0, 0.0, 1.0}), angles_start = {0.0, 0.0, 0.0}) annotation (Placement(transformation(extent = {{-60, 80}, {-40, 100}})));\n')
@@ -527,9 +533,9 @@ def save_robot_test(robot, robotname, modelname, visualization2, stationary, num
 
         # add robot run
         if visualization2:
-            f.write('  ' + robotClassName + 'Run ' + robotClassName.lower() + 'Run(enableCollision = enableCollision, overwriteColor = overwriteColor) annotation (Placement(transformation(extent = {{-10, -10}, {10, 10}})));\n')
+            f.write('  ' + robotClassName + 'Run ' + robotClassName.lower() + 'Run(enableCollision = enableCollision, checkJointLimits = checkJointLimits, assertionLevel = assertionLevel, overwriteColor = overwriteColor) annotation (Placement(transformation(extent = {{-10, -10}, {10, 10}})));\n')
         else:
-            f.write('  ' + robotClassName + 'Run ' + robotClassName.lower() + 'Run(enableCollision = enableCollision) annotation (Placement(transformation(extent = {{-10, -10}, {10, 10}})));\n')
+            f.write('  ' + robotClassName + 'Run ' + robotClassName.lower() + 'Run(enableCollision = enableCollision, checkJointLimits = checkJointLimits, assertionLevel = assertionLevel) annotation (Placement(transformation(extent = {{-10, -10}, {10, 10}})));\n')
 
         f.write('\nequation\n')
 
