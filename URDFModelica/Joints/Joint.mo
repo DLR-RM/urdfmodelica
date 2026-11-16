@@ -3,13 +3,16 @@ model Joint
   extends Modelica.Mechanics.MultiBody.Interfaces.PartialTwoFrames;
   replaceable parameter Records.Joint jointParams constrainedby Records.Joint
     annotation (Placement(transformation(extent = {{-100, 80}, {-80, 100}})), choicesAllMatching = true);
+  parameter Boolean checkJointLimits = true "If true, the joint limits are checked";
+  parameter AssertionLevel assertionLevel = AssertionLevel.warning "Assertion level (warning or error)";
+
   Fixed fixed(jointParams = jointParams) if jointParams.jointType == Types.JointType.fixedJoint
     annotation (Placement(transformation(extent = {{-10, 60}, {10, 80}})));
   Continuous continuous(jointParams = jointParams) if jointParams.jointType == Types.JointType.continuous
     annotation (Placement(transformation(extent = {{-10, 30}, {10, 50}})));
-  Revolute revolute(jointParams = jointParams) if jointParams.jointType == Types.JointType.revolute
+  Revolute revolute(jointParams = jointParams, checkJointLimits = checkJointLimits, assertionLevel = assertionLevel) if jointParams.jointType == Types.JointType.revolute
     annotation (Placement(transformation(extent = {{-10, -10}, {10, 10}})));
-  Prismatic prismatic(jointParams = jointParams) if jointParams.jointType == Types.JointType.prismatic
+  Prismatic prismatic(jointParams = jointParams, checkJointLimits = checkJointLimits, assertionLevel = assertionLevel) if jointParams.jointType == Types.JointType.prismatic
     annotation (Placement(transformation(extent = {{-10, -50}, {10, -30}})));
   Planar planar(jointParams = jointParams) if jointParams.jointType == Types.JointType.planar
     annotation (Placement(transformation(extent = {{-10, -80}, {10, -60}})));

@@ -17,19 +17,19 @@ model JointLimitCheck "Checks the joint limits and throws warnings or errors."
   Modelica.Blocks.Interfaces.RealInput jointTorque
     annotation (Placement(transformation(extent={{-140,-60},{-100,-20}})));
 equation
-  assert(jointAngle >= lower,    "Joint position over high limit", assertionLevel);
-  assert(jointAngle <= upper,     "Joint position over low limit", assertionLevel);
+  assert(jointAngle >= lower, "Joint position over high limit", assertionLevel);
+  assert(jointAngle <= upper, "Joint position over low limit", assertionLevel);
   assert(abs(jointVelocity) <= velocity, "Joint speed over limit", assertionLevel);
-  assert(abs(jointTorque) <= effort,    "Joint torque over limit", assertionLevel);
+  assert(abs(jointTorque) <= effort, "Joint torque over limit", assertionLevel);
 
-  annotation (
-    preferredView="text",
-    Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{-80,80},{80,-80}},
-          textColor={0,0,0},
-          textString="ang>=low?
+  annotation (preferredView = "text",
+    Icon(coordinateSystem(preserveAspectRatio = false), graphics = {
+      Text(
+        extent = {{-80, 80}, {80, -80}},
+        textColor = {0, 0, 0},
+        textString = "ang>=low?
 ang<=upp?
 vel<=vlim?
 tq<=effort?")}),
-    Diagram(coordinateSystem(preserveAspectRatio=false)));
+    Diagram(coordinateSystem(preserveAspectRatio = false)));
 end JointLimitCheck;

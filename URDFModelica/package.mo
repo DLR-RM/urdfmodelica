@@ -11,9 +11,9 @@ package URDFModelica
 
   annotation (
     preferredView = "info",
-    version = "0.3.4",
-    versionDate = "2026-02-06",
-    uses(Modelica(version = "4.0.0")),
+    version = "0.4.0",
+    versionDate = "2026-11-16",
+    uses(Modelica(version = "4.1.0")),
     Documentation(info = "<html>
     <H1>URDF Modelica</H1> 
 <p>Package <strong>URDFModelica</strong> is a package to convert

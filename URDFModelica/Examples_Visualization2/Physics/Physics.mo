@@ -12,6 +12,8 @@ model Physics
   parameter Integer numOtherJoints = 7;
   final parameter Integer numJoints = numRotationalJoints + numTranslationalJoints + numOtherJoints;
   parameter Boolean enableCollision = true;
+  parameter Boolean checkJointLimits = true "If true, the joint limits are checked";
+  parameter AssertionLevel assertionLevel = AssertionLevel.warning "Assertion level (warning or error)";
   parameter Boolean overwriteColor = true "Visualization2 overwrite color of meshes with color from URDF source";
 
   Modelica.Mechanics.Rotational.Interfaces.Flange_b rotational_flange_b[numRotationalJoints] if numRotationalJoints > 0
@@ -71,13 +73,13 @@ model Physics
     annotation (Placement(transformation(origin = {45, 10}, extent = {{-10, -10}, {10, 10}})));
   Joints.Left_back_wheel_joint left_back_wheel_joint(flangeIndex = 4)
     annotation (Placement(transformation(origin = {45, -20}, extent = {{-10, -10}, {10, 10}})));
-  Joints.Gripper_extension gripper_extension(flangeIndex = 1)
+  Joints.Gripper_extension gripper_extension(flangeIndex = 1, checkJointLimits = checkJointLimits, assertionLevel = assertionLevel)
     annotation (Placement(transformation(origin = {-55, -50}, extent = {{-10, -10}, {10, 10}})));
-  Joints.Left_gripper_joint left_gripper_joint(flangeIndex = 5)
+  Joints.Left_gripper_joint left_gripper_joint(flangeIndex = 5, checkJointLimits = checkJointLimits, assertionLevel = assertionLevel)
     annotation (Placement(transformation(origin = {-5, -50}, extent = {{-10, -10}, {10, 10}})));
   Joints.Left_tip_joint left_tip_joint
     annotation (Placement(transformation(origin = {45, -50}, extent = {{-10, -10}, {10, 10}})));
-  Joints.Right_gripper_joint right_gripper_joint(flangeIndex = 6)
+  Joints.Right_gripper_joint right_gripper_joint(flangeIndex = 6, checkJointLimits = checkJointLimits, assertionLevel = assertionLevel)
     annotation (Placement(transformation(origin = {-5, -80}, extent = {{-10, -10}, {10, 10}})));
   Joints.Right_tip_joint right_tip_joint
     annotation (Placement(transformation(origin = {45, -80}, extent = {{-10, -10}, {10, 10}})));

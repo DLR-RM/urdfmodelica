@@ -11,6 +11,8 @@ model PhysicsRun
   parameter Integer numOtherJoints = 7;
   final parameter Integer numJoints = numRotationalJoints + numTranslationalJoints + numOtherJoints;
   parameter Boolean enableCollision = true;
+  parameter Boolean checkJointLimits = true "If true, the joint limits are checked";
+  parameter AssertionLevel assertionLevel = AssertionLevel.warning "Assertion level (warning or error)";
   parameter Boolean overwriteColor = true "Visualization2 overwrite color of meshes with color from URDF source";
 
   inner Modelica.Mechanics.MultiBody.World world(enableAnimation = false, label2 = "z", n = {0, 0, -1}, animateWorld = false, animateGravity = false)
@@ -30,7 +32,7 @@ model PhysicsRun
     Placement(transformation(origin = {50, -40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Mechanics.MultiBody.Parts.Fixed[numLeafLinks] fixed annotation (
     Placement(transformation(origin = {90, -40}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
-  Physics physics(enableCollision = enableCollision, overwriteColor = overwriteColor) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));
+  Physics physics(enableCollision = enableCollision, checkJointLimits = checkJointLimits, assertionLevel = assertionLevel, overwriteColor = overwriteColor) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));
   Modelica.Mechanics.MultiBody.Joints.FreeMotion freeMotion(r_rel_a(start = {0.0, 0.0, 1.0}), angles_start = {0.0, 0.0, 0.0}) annotation (Placement(transformation(extent = {{-60, 80}, {-40, 100}})));
 
 equation

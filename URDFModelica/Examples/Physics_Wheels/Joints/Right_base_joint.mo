@@ -11,7 +11,7 @@ equation
     Line(points = {{-60, 0}, {100, 0}}, color = {95, 95, 95}));
   annotation (Icon(coordinateSystem(
         preserveAspectRatio = true,
-        extent = {{-100, -100}, {100, 100}}), graphics={
+        extent = {{-100, -100}, {100, 100}}), graphics = {
         Rectangle(
           extent = {{-100, 10}, {100, -10}},
           fillPattern = FillPattern.Solid,

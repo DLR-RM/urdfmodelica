@@ -40,10 +40,11 @@ number for easier reference in a robot diagram.
 Continuous with the difference that limits 
 for angle (upper and lower limit), angle velocity
 absolute value and effort (torque) absolute 
-value are checked against at. A warning is 
-output if a limit is violated. An integer 
-parameter can optionally be set to mark the flange 
-number for easier reference in a robot diagram.
+value by default are checked against at. This can be 
+disabled with a Boolean parameter. A warning or error 
+(depending on choice) is output if a limit is violated. 
+An integer parameter can optionally be set to mark the 
+flange number for easier reference in a robot diagram.
 </p>
 <p>
 <strong>Prismatic</strong> is the same as
@@ -51,9 +52,11 @@ Revolute for translational connection between
 links using <tt>Modelica.Mechanics.MultiBody.Joints.Prismatic</tt>. 
 The joint flanges are also propagated to the outside 
 such that the position can be controlled. 
-A warning is output if a limit (upper and lower 
+A warning or error (depending on user choice) is 
+output by default if a limit (upper and lower 
 position, velocity absolute value, effort 
-(force) absolute value) is violated. An integer 
+(force) absolute value) is violated. This can be 
+disabled with a Boolean parameter. An integer 
 parameter can optionally be set to mark the flange 
 number for easier reference in a robot diagram.
 </p>

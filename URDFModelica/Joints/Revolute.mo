@@ -23,13 +23,8 @@ model Revolute
     Placement(transformation(origin = {30, 50}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Mechanics.Rotational.Sensors.SpeedSensor speedSensor annotation (
     Placement(transformation(origin = {30, 30}, extent = {{-10, -10}, {10, 10}})));
-  URDFModelica.Joints.JointLimitCheck jointLimitCheck(
-    assertionLevel=assertionLevel,
-    lower=jointParams.limit.lower,
-    upper=jointParams.limit.upper,
-    velocity=jointParams.limit.velocity,
-    effort=jointParams.limit.effort) if checkJointLimits
-    annotation (Placement(transformation(extent={{60,20},{80,40}})));
+  URDFModelica.Joints.JointLimitCheck jointLimitCheck(assertionLevel = assertionLevel, lower = jointParams.limit.lower, upper = jointParams.limit.upper, velocity = jointParams.limit.velocity, effort = jointParams.limit.effort) if checkJointLimits annotation (
+    Placement(transformation(extent = {{60, 20}, {80, 40}})));
 equation
   connect(frame_a, fixedRotation.frame_a) annotation (
     Line(points = {{-100, 0}, {-80, 0}}));
@@ -54,12 +49,12 @@ equation
     Line(points = {{10, 2}, {10, 30}, {20, 30}}));
   connect(revolute.frame_b, frame_b) annotation (
     Line(points = {{20, -40}, {100, -40}, {100, 0}}, color = {95, 95, 95}));
-  connect(angleSensor.phi, jointLimitCheck.jointAngle)
-    annotation (Line(points={{41,50},{50,50},{50,34},{58,34}}, color={0,0,127}));
-  connect(speedSensor.w, jointLimitCheck.jointVelocity)
-    annotation (Line(points={{41,30},{58,30}}, color={0,0,127}));
-  connect(torqueSensor.tau, jointLimitCheck.jointTorque)
-    annotation (Line(points={{21,0},{50,0},{50,26},{58,26}}, color={0,0,127}));
+  connect(angleSensor.phi, jointLimitCheck.jointAngle) annotation (
+    Line(points = {{41, 50}, {50, 50}, {50, 34}, {58, 34}}, color={0, 0, 127}));
+  connect(speedSensor.w, jointLimitCheck.jointVelocity) annotation (
+    Line(points = {{41, 30}, {58, 30}}, color = {0, 0, 127}));
+  connect(torqueSensor.tau, jointLimitCheck.jointTorque) annotation (
+    Line(points = {{21, 0}, {50, 0}, {50, 26}, {58, 26}}, color = {0, 0, 127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {
         Rectangle(
           lineColor = {64, 64, 64},
@@ -91,8 +86,8 @@ equation
           textString = "%name",
           textColor = {0, 0, 255}),
         Text(
-		  extent = {{-150, -100}, {150, -70}},
-		  textString = "n=%jointParams.axis.xyz"),
+          extent = {{-150, -100}, {150, -70}},
+          textString = "n=%jointParams.axis.xyz"),
         Text(
           origin = {0, -10},
           textColor = {135, 135, 135},

@@ -8,6 +8,8 @@ model Robot
   parameter Boolean enableCollision = false;
   parameter Boolean enableInertial = true;
   parameter Boolean showLinkFrames = true;
+  parameter Boolean checkJointLimits = true "If true, the joint limits are checked";
+  parameter AssertionLevel assertionLevel = AssertionLevel.warning "Assertion level (warning or error)";
 
   parameter Integer numAxes = robotParams.numAxes;
   parameter Integer nL = size(robotParams.link, 1);
@@ -27,7 +29,7 @@ protected
 
   replaceable Links.Link link[nL](linkParams = robotParams.link, each enableCollision = enableCollision, each enableInertial = enableInertial)
     annotation (Placement(transformation(extent = {{40, -10}, {60, 10}})));
-  Joints.Joint joint[nJ](jointParams = robotParams.joint) annotation (Placement(transformation(extent = {{-20, -10}, {0, 10}})));
+  Joints.Joint joint[nJ](jointParams = robotParams.joint, each checkJointLimits = checkJointLimits, each assertionLevel = assertionLevel) annotation (Placement(transformation(extent = {{-20, -10}, {0, 10}})));
 
 equation
   // Connect moveable joints to corresponding flanges

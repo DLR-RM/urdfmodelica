@@ -12,6 +12,8 @@ model Ur10e_robot
   parameter Integer numOtherJoints = 4;
   final parameter Integer numJoints = numRotationalJoints + numTranslationalJoints + numOtherJoints;
   parameter Boolean enableCollision = true;
+  parameter Boolean checkJointLimits = true "If true, the joint limits are checked";
+  parameter AssertionLevel assertionLevel = AssertionLevel.warning "Assertion level (warning or error)";
 
   Modelica.Mechanics.Rotational.Interfaces.Flange_b rotational_flange_b[numRotationalJoints] if numRotationalJoints > 0
     annotation (Placement(transformation(extent = {{-100, 90}, {-80, 110}})));
@@ -46,17 +48,17 @@ model Ur10e_robot
     annotation (Placement(transformation(origin = {370, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
   Joints.Base_link_base_link_inertia base_link_base_link_inertia
     annotation (Placement(transformation(origin = {-55, 40}, extent = {{-10, -10}, {10, 10}})));
-  Joints.Shoulder_pan_joint shoulder_pan_joint(flangeIndex = 1)
+  Joints.Shoulder_pan_joint shoulder_pan_joint(flangeIndex = 1, checkJointLimits = checkJointLimits, assertionLevel = assertionLevel)
     annotation (Placement(transformation(origin = {-5, 40}, extent = {{-10, -10}, {10, 10}})));
-  Joints.Shoulder_lift_joint shoulder_lift_joint(flangeIndex = 2)
+  Joints.Shoulder_lift_joint shoulder_lift_joint(flangeIndex = 2, checkJointLimits = checkJointLimits, assertionLevel = assertionLevel)
     annotation (Placement(transformation(origin = {45, 40}, extent = {{-10, -10}, {10, 10}})));
-  Joints.Elbow_joint elbow_joint(flangeIndex = 3)
+  Joints.Elbow_joint elbow_joint(flangeIndex = 3, checkJointLimits = checkJointLimits, assertionLevel = assertionLevel)
     annotation (Placement(transformation(origin = {95, 40}, extent = {{-10, -10}, {10, 10}})));
-  Joints.Wrist_1_joint wrist_1_joint(flangeIndex = 4)
+  Joints.Wrist_1_joint wrist_1_joint(flangeIndex = 4, checkJointLimits = checkJointLimits, assertionLevel = assertionLevel)
     annotation (Placement(transformation(origin = {145, 40}, extent = {{-10, -10}, {10, 10}})));
-  Joints.Wrist_2_joint wrist_2_joint(flangeIndex = 5)
+  Joints.Wrist_2_joint wrist_2_joint(flangeIndex = 5, checkJointLimits = checkJointLimits, assertionLevel = assertionLevel)
     annotation (Placement(transformation(origin = {195, 40}, extent = {{-10, -10}, {10, 10}})));
-  Joints.Wrist_3_joint wrist_3_joint(flangeIndex = 6)
+  Joints.Wrist_3_joint wrist_3_joint(flangeIndex = 6, checkJointLimits = checkJointLimits, assertionLevel = assertionLevel)
     annotation (Placement(transformation(origin = {245, 40}, extent = {{-10, -10}, {10, 10}})));
   Joints.Base_link_base_fixed_joint base_link_base_fixed_joint
     annotation (Placement(transformation(origin = {-55, 70}, extent = {{-10, -10}, {10, 10}})));
