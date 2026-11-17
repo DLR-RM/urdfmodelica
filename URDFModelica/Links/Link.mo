@@ -9,7 +9,7 @@ model Link
     r = linkParams.inertial.origin.xyz,
     rotationType = Modelica.Mechanics.MultiBody.Types.RotationTypes.PlanarRotationSequence,
     sequence = {3, 2, 1},
-    angles = Modelica.Units.Conversions.to_deg({linkParams.inertial.origin.rpy[3], linkParams.inertial.origin.rpy[2], linkParams.inertial.origin.rpy[1]}), animation = false)                   annotation (
+    angles = Modelica.Units.Conversions.to_deg({linkParams.inertial.origin.rpy[3], linkParams.inertial.origin.rpy[2], linkParams.inertial.origin.rpy[1]}), animation = false) annotation (
     Placement(transformation(extent = {{-70, -10}, {-50, 10}})));
   Modelica.Mechanics.MultiBody.Parts.FixedRotation trafoVisual(
     r = linkParams.visual.origin.xyz,
