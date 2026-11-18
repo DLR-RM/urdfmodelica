@@ -11,6 +11,8 @@ model TestURDF
   parameter Integer numOtherJoints = 0;
   final parameter Integer numJoints = numRotationalJoints + numTranslationalJoints + numOtherJoints;
   parameter Boolean enableCollision = true;
+  parameter Boolean checkJointLimits = true "If true, the joint limits are checked";
+  parameter AssertionLevel assertionLevel = AssertionLevel.warning "Assertion level (warning or error)";
 
   Modelica.Blocks.Sources.KinematicPTP2 rotationalPTP(q_begin = zeros(numRotationalJoints), q_end = ones(numRotationalJoints), qd_max = 0.1*ones(numRotationalJoints), qdd_max = 0.01*ones(numRotationalJoints), startTime = 1.0) if numRotationalJoints > 0
     annotation (Placement(transformation(origin = {-50, -20}, extent = {{-10, -10}, {10, 10}})));

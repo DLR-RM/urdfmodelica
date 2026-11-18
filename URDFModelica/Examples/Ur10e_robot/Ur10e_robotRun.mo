@@ -11,6 +11,8 @@ model Ur10e_robotRun
   parameter Integer numOtherJoints = 4;
   final parameter Integer numJoints = numRotationalJoints + numTranslationalJoints + numOtherJoints;
   parameter Boolean enableCollision = true;
+  parameter Boolean checkJointLimits = true "If true, the joint limits are checked";
+  parameter AssertionLevel assertionLevel = AssertionLevel.warning "Assertion level (warning or error)";
 
   inner Modelica.Mechanics.MultiBody.World world(enableAnimation = true, label2 = "z", n = {0, 0, -1}, animateWorld = false, animateGravity = false)
     annotation (Placement(transformation(origin = {-90, 90}, extent = {{-10, -10}, {10, 10}})));
@@ -24,7 +26,7 @@ model Ur10e_robotRun
     annotation (Placement(transformation(origin = {-120, 50}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-120, 60}, extent = {{-20, -20}, {20, 20}})));
   Modelica.Mechanics.MultiBody.Visualizers.Rectangle plane(length_u = 100, length_v = 100)  annotation (
     Placement(transformation(origin = {-10, 90}, extent = {{-10, -10}, {10, 10}})));
-  Ur10e_robot ur10e_robot(enableCollision = enableCollision) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));
+  Ur10e_robot ur10e_robot(enableCollision = enableCollision, checkJointLimits = checkJointLimits, assertionLevel = assertionLevel) annotation (Placement(transformation(extent = {{-20, -60}, {20, -20}})));
 
 equation
   connect(ur10e_robot.frame_a, world.frame_b) annotation (Line(points = {{-20, -40}, {-30, -40}, {-30, 90}, {-80, 90}}, color = {95, 95, 95}));

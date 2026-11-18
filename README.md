@@ -29,7 +29,7 @@ There are three folders in the repository:
 This is a step by step guide of how to set up a simulation of a robot described as URDF file. Please refer to the URDF export function of CAD software for how to create the URDF (XML) file and associated meshes. The [ROS 2 documentation export page](http://docs.ros.org/en/jazzy/Tutorials/Intermediate/URDF/Exporting-an-URDF-File.html) may be of good advice.
 
 ### Prerequisites
-The library has been developed and tested on OpenModelica v1.24.0 and Dymola 2024x. Visualizers from the DLR Visualization 2 library only work with Dymola. Similarly, the generic robot simulation from a single record only works with Dymola.
+The library has been developed and tested on OpenModelica v1.27.1 and Dymola 2026x. Visualizers from the DLR Visualization 2 library only work well with Dymola but OpenModelica begins to get supported as of the second half of 2026. Similarly, the generic robot simulation from a single record only works with Dymola but fixing the issue is actively worked on as of the second half of 2026.
 
 The Python code has been developed and tested with Python 3.12 from the official sources. The module [urdf_parser_py](https://github.com/ros/urdf_parser_py) has been installed with pip.
 

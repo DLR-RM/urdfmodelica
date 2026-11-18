@@ -22,7 +22,7 @@ equation
     Line(points = {{4, 10}, {-50, 10}, {-50, 100}}));
   connect(revolute.axis, flange_a) annotation (
     Line(points = {{10, 10}, {10, 100}, {0, 100}}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={
+  annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {
         Rectangle(
           lineColor = {64, 64, 64},
           fillColor = {39, 150, 249},
